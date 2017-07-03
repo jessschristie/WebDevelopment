@@ -1,0 +1,58 @@
+﻿@model DaysProject5.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeekendRevenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeekendRevenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GrossRevenue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GrossRevenue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Release)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Release)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Recommended)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Recommended)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,66 @@
+﻿@model DaysProject5.Models.Movie
+    
+    <div class="form-horizontal">
+        <h4>Movie</h4>
+        <hr />
+        <div id="error" class="text-danger"></div>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WeekendRevenue, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WeekendRevenue, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "0.01", @value = "0" } })
+                @Html.ValidationMessageFor(model => model.WeekendRevenue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GrossRevenue, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GrossRevenue, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "0.01", @value = "0" } })
+                @Html.ValidationMessageFor(model => model.GrossRevenue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Release, htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-10">
+                @(Html.Kendo().DatePickerFor(model => model.Release)
+              .Start(CalendarView.Month)
+              .Depth(CalendarView.Year)
+              .Format("dd MMM yyyy")
+              .HtmlAttributes(new { style = "width: 100%", title = "datepicker" })
+                )
+                @Html.ValidationMessageFor(model => model.Release, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Recommended, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Recommended)
+                    @Html.ValidationMessageFor(model => model.Recommended, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Create" class="btn btn-default" onclick="CreateMovie()"/>
+            </div>
+        </div>
+    </div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="@Url.Content("~/Scripts/Apps/Movie.js")"></script>

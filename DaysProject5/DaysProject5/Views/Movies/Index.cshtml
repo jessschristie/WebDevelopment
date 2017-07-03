@@ -1,0 +1,56 @@
+﻿@using DaysProject5.ViewModel
+
+
+
+<h2>@ViewBag.Title</h2>
+
+<a href="#" id="OpenWindow" onclick="CreateNewMovie()">Create New</a>
+
+@Html.Kendo().Window().Name("CreateWindow").Title("Create New User").LoadContentFrom("LaunchWindow", "Movies").Visible(false).Height(600).Width(350)
+
+
+@(Html.Kendo().Window().Name("Details")
+                .Title("Movie Details")
+                .Visible(false)
+                .Modal(true)
+                .Draggable(true)
+                .Width(300)
+)
+@(Html.Kendo().Grid<MovieViewModel>()
+    .Name("grid")
+    .Columns(c =>
+    {
+        c.Bound(p => p.Title);
+        c.Bound(p => p.WeekendRevenue);
+        c.Bound(p => p.GrossRevenue);
+        c.Bound(p => p.Release).EditorTemplateName("Date").Format("{0:dd MMM yyyy}");
+        c.Bound(p => p.Recommended).ClientTemplate("#: Recommended ? 'Yes' : 'No' #");
+        c.Command(command => { command.Edit(); command.Destroy(); command.Custom("Details").Click("showDetails"); });
+    })
+
+    .Pageable()
+    .Sortable()
+    .DataSource(d => d
+    .Ajax()
+    .Model(model => model.Id(p => p.ID))
+    .Read(r => r.Action("Read", "Movies"))
+    .Update(update => update.Action("EditingInline_Update", "Movies"))
+    .Destroy(update => update.Action("EditingInline_Destroy", "Movies"))
+    .Read(r => r.Action("Custom_Read", "Movies"))
+
+    )
+)
+
+<script type="text/x-kendo-template" id="template">
+    <div id="details-container">
+        <h2>#= Title #</h2>
+        <em>Release: #= Release #</em>
+        <dl>
+            <dt>Recommended: #: Recommended ? 'Yes' : 'No' #</dt>
+            <dt>Weekend Revenue: #= WeekendRevenue #</dt>
+            <dt>Gross Revenue: #= GrossRevenue #</dt>
+        </dl>
+    </div>
+</script>
+
+<script src="@Url.Content("~/Scripts/Apps/Movie.js")"></script>

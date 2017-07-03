@@ -1,0 +1,97 @@
+﻿@model DaysProject5.Models.Movie
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+@*<script>
+    function CreateMovie() {
+        $.ajax({
+            url: "@Url.Action("CreateMovie", "Movies")",
+            type: 'POST',
+            data: {
+                Title: $('#Title').val(),
+                WeekendRevenue: $('#WeekendRevenue').val(),
+                GrossRevenue: $('#GrossRevenue').val(),
+                Release: $('#Release').val(),
+                Recommended: $('#Recommended').val()
+            },
+            success: function (result) {
+                alert("Success");
+            }
+        });
+    };
+</script>*@
+<script src="~/Scripts/Apps/Movie.js"></script>
+
+@Scripts.Render("~/bundles/jquery")
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @*@Html.AntiForgeryToken()*@
+    
+    <div class="form-horizontal">
+        <h4>Movie</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WeekendRevenue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WeekendRevenue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WeekendRevenue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GrossRevenue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.GrossRevenue, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.GrossRevenue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Release, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Release, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Release, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Recommended, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Recommended)
+                    @Html.ValidationMessageFor(model => model.Recommended, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="btnSubmit" type="submit" value="Create" class="btn btn-default" onclick="CreateMovie()"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
